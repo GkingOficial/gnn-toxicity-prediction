@@ -1,0 +1,6 @@
+model_checkpoint_path: "ToxicidadeGCN_fold4.ckpt-151"
+all_model_checkpoint_paths: "ToxicidadeGCN_fold4.ckpt-147"
+all_model_checkpoint_paths: "ToxicidadeGCN_fold4.ckpt-148"
+all_model_checkpoint_paths: "ToxicidadeGCN_fold4.ckpt-149"
+all_model_checkpoint_paths: "ToxicidadeGCN_fold4.ckpt-150"
+all_model_checkpoint_paths: "ToxicidadeGCN_fold4.ckpt-151"

@@ -1,0 +1,129 @@
+===== Fold 1 =====
+Treino:
+Accuracy: 0.9992
+AUROC: 1.0000
+MCC: 0.9985
+Recall: 0.9996
+Specificity: 0.9988
+Precision: 0.9989
+F1-score: 0.9993
+TP: 2796
+FP: 3
+FN: 1
+TN: 2403
+Teste:
+Accuracy: 0.7842
+AUROC: 0.8564
+MCC: 0.5658
+Recall: 0.8000
+Specificity: 0.7658
+Precision: 0.7989
+F1-score: 0.7994
+TP: 560
+FP: 141
+FN: 140
+TN: 461
+
+===== Fold 2 =====
+Treino:
+Accuracy: 0.9990
+AUROC: 1.0000
+MCC: 0.9981
+Recall: 0.9989
+Specificity: 0.9992
+Precision: 0.9993
+F1-score: 0.9991
+TP: 2794
+FP: 2
+FN: 3
+TN: 2404
+Teste:
+Accuracy: 0.7496
+AUROC: 0.8176
+MCC: 0.4957
+Recall: 0.7771
+Specificity: 0.7176
+Precision: 0.7619
+F1-score: 0.7694
+TP: 544
+FP: 170
+FN: 156
+TN: 432
+
+===== Fold 3 =====
+Treino:
+Accuracy: 0.9988
+AUROC: 1.0000
+MCC: 0.9977
+Recall: 0.9979
+Specificity: 1.0000
+Precision: 1.0000
+F1-score: 0.9989
+TP: 2791
+FP: 0
+FN: 6
+TN: 2406
+Teste:
+Accuracy: 0.7865
+AUROC: 0.8510
+MCC: 0.5700
+Recall: 0.8114
+Specificity: 0.7575
+Precision: 0.7955
+F1-score: 0.8034
+TP: 568
+FP: 146
+FN: 132
+TN: 456
+
+===== Fold 4 =====
+Treino:
+Accuracy: 0.9994
+AUROC: 1.0000
+MCC: 0.9988
+Recall: 0.9996
+Specificity: 0.9992
+Precision: 0.9993
+F1-score: 0.9995
+TP: 2797
+FP: 2
+FN: 1
+TN: 2405
+Teste:
+Accuracy: 0.7646
+AUROC: 0.8438
+MCC: 0.5253
+Recall: 0.8083
+Specificity: 0.7138
+Precision: 0.7666
+F1-score: 0.7869
+TP: 565
+FP: 172
+FN: 134
+TN: 429
+
+===== Fold 5 =====
+Treino:
+Accuracy: 0.9992
+AUROC: 1.0000
+MCC: 0.9985
+Recall: 0.9989
+Specificity: 0.9996
+Precision: 0.9996
+F1-score: 0.9993
+TP: 2796
+FP: 1
+FN: 3
+TN: 2406
+Teste:
+Accuracy: 0.7891
+AUROC: 0.8565
+MCC: 0.5772
+Recall: 0.7880
+Specificity: 0.7903
+Precision: 0.8136
+F1-score: 0.8006
+TP: 550
+FP: 126
+FN: 148
+TN: 475

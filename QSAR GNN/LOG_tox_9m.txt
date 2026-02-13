@@ -1,0 +1,131 @@
+dim1 = 62
+dim2 = 768
+max_atoms = 170
+num_layer = 4
+batch_size = 8
+epoch_size = 200
+learning_rate = 0.0003
+regularization_scale = 3e-4
+beta1 = 0.9
+beta2 = 0.98
+patience = 20
+
+===== Fold 1/5 =====
+Treino: {0: 591, 1: 236}
+Teste: {0: 148, 1: 60}
+
+Time for 199 -th epoch:  -0.001
+Loss        Train: 0.176
+Accuracy    Train: 0.946
+AUROC       Train: 0.944
+train_mcc: 0.8647880565380708 train_recall 0.8686440677966102 train_spec 0.9763113367174281
+Finish training! Total required time for training :  1831.9501490592957
+
+True Positive: 43
+False Positive 13
+False Negative: 17
+True negative: 135
+Accuracy: 0.8557692307692307
+testAuroc 0.8156531531531532
+MCC 0.6422781078195999
+Specificity: 0.9121621621621622
+Precision: 0.7678571428571429
+Recall: 0.7166666666666667
+Fmeasure 0.7413793103448276
+Finish Testing, Total time for test: 19.342830181121826
+
+===== Fold 2/5 =====
+Treino: {0: 591, 1: 237}
+Teste: {0: 148, 1: 59}
+
+Time for 199 -th epoch:  -0.001
+Loss        Train: 0.246
+Accuracy    Train: 0.915
+AUROC       Train: 0.936
+train_mcc: 0.7884291753235451 train_recall 0.759493670886076 train_spec 0.9780033840947546
+Finish training! Total required time for training :  2614.3798847198486
+
+True Positive: 40
+False Positive 8
+False Negative: 19
+True negative: 140
+Accuracy: 0.8695652173913043
+testAuroc 0.8134448007329362
+MCC 0.6673613553854258
+Specificity: 0.9459459459459459
+Precision: 0.8333333333333334
+Recall: 0.6779661016949152
+Fmeasure 0.7476635514018691
+Finish Testing, Total time for test: 20.3983793258667
+
+===== Fold 3/5 =====
+Treino: {0: 591, 1: 237}
+Teste: {0: 148, 1: 59}
+
+Time for 199 -th epoch:  -0.001
+Loss        Train: 0.208
+Accuracy    Train: 0.924
+AUROC       Train: 0.962
+train_mcc: 0.8105511537734874 train_recall 0.8270042194092827 train_spec 0.9627749576988156
+Finish training! Total required time for training :  2297.706344127655
+
+True Positive: 34
+False Positive 14
+False Negative: 25
+True negative: 134
+Accuracy: 0.8115942028985508
+testAuroc 0.7308176820888685
+MCC 0.5152206058647395
+Specificity: 0.9054054054054054
+Precision: 0.7083333333333334
+Recall: 0.576271186440678
+Fmeasure 0.6355140186915887
+Finish Testing, Total time for test: 27.68295454978943
+
+===== Fold 4/5 =====
+Treino: {0: 591, 1: 237}
+Teste: {0: 148, 1: 59}
+
+Time for 199 -th epoch:  -0.001
+Loss        Train: 0.276
+Accuracy    Train: 0.914
+AUROC       Train: 0.874
+train_mcc: 0.7855064695395777 train_recall 0.7510548523206751 train_spec 0.9796954314720813
+Finish training! Total required time for training :  1999.9033381938934
+
+True Positive: 34
+False Positive 15
+False Negative: 25
+True negative: 133
+Accuracy: 0.8067632850241546
+testAuroc 0.7280119102153
+MCC 0.5043715580561675
+Specificity: 0.8986486486486487
+Precision: 0.6938775510204082
+Recall: 0.576271186440678
+Fmeasure 0.6296296296296297
+Finish Testing, Total time for test: 14.398095607757568
+
+===== Fold 5/5 =====
+Treino: {0: 592, 1: 237}
+Teste: {0: 147, 1: 59}
+
+Time for 199 -th epoch:  0.0
+Loss        Train: 0.226
+Accuracy    Train: 0.922
+AUROC       Train: 0.951
+train_mcc: 0.8038424861188155 train_recall 0.8016877637130801 train_spec 0.9695945945945946
+Finish training! Total required time for training :  2207.070703983307
+
+True Positive: 37
+False Positive 20
+False Negative: 22
+True negative: 127
+Accuracy: 0.7961165048543689
+testAuroc 0.7414965986394558
+MCC 0.49624072749247017
+Specificity: 0.8639455782312925
+Precision: 0.6491228070175439
+Recall: 0.6271186440677966
+Fmeasure 0.6379310344827587
+Finish Testing, Total time for test: 13.256036281585693
