@@ -1,5 +1,6 @@
 # from ConcreteDropout import ConcreteDropout
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 # from tensorflow.keras.layers import Dense, Conv1D
 
@@ -9,8 +10,8 @@ def conv1d_with_concrete_dropout(x, out_dim, wd, dd):
                                                     kernel_size=1,
                                                     use_bias=True,
                                                     activation=None,
-                                                    kernel_initializer=tf.contrib.layers.xavier_initializer(),
-                                                    bias_initializer=tf.contrib.layers.xavier_initializer())(x)
+                                                    kernel_initializer=tf.compat.v1.glorot_uniform_initializer(),
+                                                    bias_initializer=tf.compat.v1.glorot_uniform_initializer())(x)
     print("output1", output.get_shape())
     # output = tf.keras.layers.BatchNormalization()(output)
     # output = tf.keras.layers.AveragePooling1D(3,1,"same")(output)
@@ -24,8 +25,8 @@ def dense_with_concrete_dropout(x, out_dim, wd, dd):
     output = tf.keras.layers.Dense(units=out_dim,
                                                    use_bias=True,
                                                    activation=None,
-                                                   kernel_initializer=tf.contrib.layers.xavier_initializer(),
-                                                   bias_initializer=tf.contrib.layers.xavier_initializer())(x)
+                                                   kernel_initializer=tf.compat.v1.glorot_uniform_initializer(),
+                                                   bias_initializer=tf.compat.v1.glorot_uniform_initializer())(x)
     return output
 
 
@@ -44,12 +45,12 @@ def attn_matrix(A, X, attn_weight):
 
 def get_gate_coeff(X1, X2, dim, label):
     num_atoms = int(X1.get_shape()[1])
-    _b = tf.get_variable('mem_coef-' + str(label), initializer=tf.contrib.layers.xavier_initializer(), shape=[dim],
+    _b = tf.compat.v1.get_variable('mem_coef-' + str(label), initializer=tf.compat.v1.glorot_uniform_initializer(), shape=[dim],
                          dtype=tf.float32)
     _b = tf.reshape(tf.tile(_b, [num_atoms]), [num_atoms, dim])
 
-    X1 = tf.layers.dense(X1, units=dim, use_bias=False)
-    X2 = tf.layers.dense(X2, units=dim, use_bias=False)
+    X1 = tf.compat.v1.layers.dense(X1, units=dim, use_bias=False)
+    X2 = tf.compat.v1.layers.dense(X2, units=dim, use_bias=False)
 
     output = tf.nn.sigmoid(X1 + X2 + _b)
     return output
@@ -72,17 +73,17 @@ def graph_attn_gate(A, X, attn, out_dim, label, length, num_train):
 
 
     _X = tf.nn.relu(tf.concat(X_total, 2))
-    _X = tf.layers.conv1d(_X,
+    _X = tf.compat.v1.layers.conv1d(_X,
                           filters=out_dim,
                           kernel_size=1,
                           use_bias=False,
                           activation=None,
-                          kernel_initializer=tf.contrib.layers.xavier_initializer(),
-                          bias_initializer=tf.contrib.layers.xavier_initializer())
+                          kernel_initializer=tf.compat.v1.glorot_uniform_initializer(),
+                          bias_initializer=tf.compat.v1.glorot_uniform_initializer())
 
     dim = int(_X.get_shape()[2])
     if (int(X.get_shape()[2]) != dim):
-        X = tf.layers.dense(X, dim, use_bias=False)
+        X = tf.compat.v1.layers.dense(X, dim, use_bias=False)
     coeff = get_gate_coeff(_X, X, dim, label)
     output = tf.multiply(_X, coeff) + tf.multiply(X, 1.0 - coeff)
     return output
@@ -94,8 +95,8 @@ def encoder_gat_gate(X, A, num_layers, out_dim, num_attn, length, num_train):
     for i in range(num_layers):
         attn_weight = []
         for j in range(num_attn):
-            attn_weight.append(tf.get_variable('eaw' + str(i) + '_' + str(j),
-                                               initializer=tf.contrib.layers.xavier_initializer(),
+            attn_weight.append(tf.compat.v1.get_variable('eaw' + str(i) + '_' + str(j),
+                                               initializer=tf.compat.v1.glorot_uniform_initializer(),
                                                shape=[out_dim, out_dim],
                                                dtype=tf.float32)
                                )
@@ -152,11 +153,11 @@ def readout_and_mlp(X, latent_dim, length, num_train):
     Y_mean = tf.keras.layers.Dense(units=1,
                                    use_bias=True,
                                    activation=None,
-                                   kernel_initializer=tf.contrib.layers.xavier_initializer(),
-                                   bias_initializer=tf.contrib.layers.xavier_initializer())(_Y)
+                                   kernel_initializer=tf.compat.v1.glorot_uniform_initializer(),
+                                   bias_initializer=tf.compat.v1.glorot_uniform_initializer())(_Y)
     Y_logvar = tf.keras.layers.Dense(units=1,
                                      use_bias=True,
                                      activation=None,
-                                     kernel_initializer=tf.contrib.layers.xavier_initializer(),
-                                     bias_initializer=tf.contrib.layers.xavier_initializer())(_Y)
+                                     kernel_initializer=tf.compat.v1.glorot_uniform_initializer(),
+                                     bias_initializer=tf.compat.v1.glorot_uniform_initializer())(_Y)
     return Z, Y_mean, Y_logvar,weights

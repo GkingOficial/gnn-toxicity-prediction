@@ -1,14 +1,15 @@
 import numpy as np
 import pandas as pd
 import random
+from config import DATA_DIR, TOX_DIR
 from rdkit import Chem
-import tensorflow as tf
 from sklearn.model_selection import KFold
 
 def load_folds():
     folds = []
     for i in range(5):
-        df = pd.read_csv(f"../data/toxicidade/toxicidade_fold{i+1}.csv")
+        file_path = TOX_DIR / f"toxicidade_fold{i+1}.csv"
+        df = pd.read_csv(file_path)
         smi = df["SMILES"].values
         prop = df["Label"].values
         folds.append((smi, prop))

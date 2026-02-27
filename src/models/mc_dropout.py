@@ -1,4 +1,6 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 from . import blocks
 
 import numpy as np
@@ -8,6 +10,10 @@ class mc_dropout():
 
     def __init__(self, FLAGS):
         self.FLAGS = FLAGS
+
+        if self.FLAGS.num_train is None:
+            raise ValueError("config.num_train is None. Set it per-fold: num_train=len(train_set).")
+
         self.A = tf.placeholder(dtype=tf.float32, shape=[None, FLAGS.max_atoms, FLAGS.max_atoms])
         self.X = tf.placeholder(dtype=tf.float32, shape=[None, FLAGS.max_atoms, 61])
         self.P = tf.placeholder(dtype=tf.float32, shape=[None])

@@ -4,6 +4,7 @@ import csv
 import sys
 import os
 import math
+from pathlib import Path
 from sklearn.metrics import accuracy_score, roc_auc_score
 from utils.utils import convert_to_graph
 from rdkit import Chem
@@ -25,14 +26,14 @@ def processUnit(iMol,start,i,batch_size,count,tracker,adj_len,full_size, fold_in
     # input()
 
     size = (120, 120)
+
+    output_dir = Path("outputs") / "mutag200" / f"Fold_{fold_index}"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     tmp = rdkit.Chem.rdmolfiles.MolFragmentToSmiles(iMol, atomsToUse=start)
     tmp1=tmp
     j=0
     full_size=full_size
-
-    with open(f"mutag200_preds_{fold_index}.csv", "a", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([f"{i * batch_size + count}.png", probability, prediction, ground_truth])
 
     start=start
     #print(start)
@@ -44,19 +45,16 @@ def processUnit(iMol,start,i,batch_size,count,tracker,adj_len,full_size, fold_in
 
             #print(start)
         else:
-            fig = Draw.MolToFile(iMol, f"./mutag200/Fold {fold_index}/" + str(i * batch_size + count) + '.png', size=size,
-                                 highlightAtoms=start)
-            print("bad")
+            fig = Draw.MolToFile(iMol, output_dir / f"{i * batch_size + count}.png", size=size, highlightAtoms=start)
+            # print("bad")
             return max(tmp1.split('.'), key=len)
         if(len(start)>0):
             tmp = rdkit.Chem.rdmolfiles.MolFragmentToSmiles(iMol, atomsToUse=start)
             #print(tmp)
         else:
-            fig = Draw.MolToFile(iMol, f"./mutag200/Fold {fold_index}/" + str(i * batch_size + count) + '.png', size=size,
-                                 highlightAtoms=start)
+            fig = Draw.MolToFile(iMol, output_dir / f"{i * batch_size + count}.png", size=size, highlightAtoms=start)
             return max(tmp1.split('.'), key=len)
-    fig = Draw.MolToFile(iMol, f"./mutag200/Fold {fold_index}/" + str(i * batch_size + count) + '.png', size=size,
-                         highlightAtoms=start)
+    fig = Draw.MolToFile(iMol, output_dir / f"{i * batch_size + count}.png", size=size, highlightAtoms=start)
 
     #print("ok")
 
@@ -449,7 +447,15 @@ def training(model, FLAGS, model_name, smi_train, prop_train, smi_test, prop_tes
             probability = mean[count]
             prediction = np.around(mean[count])
             ground_truth = Y_batch[count]
-            stuff.write(processUnit(iMol,start,i,batch_size,count,mtr_test[count],adj_len,tmpS, fold_index, probability, prediction, ground_truth) + "\n")
+
+            csv_path = Path("outputs") / f"mutag200_preds_fold{fold_index}.csv"
+
+            with open(csv_path, "a", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([f"{i * batch_size + count}.png", probability, prediction, ground_truth])
+
+            if FLAGS.save_substructures:
+                stuff.write(processUnit(iMol,start,i,batch_size,count,mtr_test[count],adj_len,tmpS, fold_index, probability, prediction, ground_truth) + "\n")
             #stuff.write(tmp4+ "\n")
             #uncomment this for the drawing.
             # fig = Draw.MolToFile(iMol, "./amesfirstmodImg3/"+str(i*batch_size+count)+'.png', size=size, highlightAtoms=start)

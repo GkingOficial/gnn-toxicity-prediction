@@ -2,3 +2,12 @@ Img_ApiTox_GNN_Fold1/
 references/
 tcc_files/
 __local_code/
+
+__pycache__/
+archive/
+*.pt
+*.pth
+*.log
+experiments/
+data/raw/
+*.xlsx

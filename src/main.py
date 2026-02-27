@@ -1,13 +1,17 @@
+from rdkit import RDLogger
+RDLogger.DisableLog('rdApp.warning')
+
 import numpy as np
 import tensorflow as tf
 from utils.utils import load_folds
 from models.mc_dropout import mc_dropout
 from training.train_gcn import training
 from config import TrainConfig
+from dataclasses import replace
 
 def main():
   FLAGS = TrainConfig()
-
+  
   folds = load_folds()
   model_name = "Refactory1402"
 
@@ -34,6 +38,9 @@ def main():
 
     unique, counts = np.unique(prop_test, return_counts=True)
     print("Teste:", dict(zip(unique, counts)))
+
+    num_train = int(len(prop_train))
+    FLAGS = replace(FLAGS, num_train = num_train)
 
     tf.compat.v1.reset_default_graph()
 
